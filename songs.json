@@ -1,0 +1,42 @@
+[
+    {
+        "songTitle": "Tompo tsy foiko",
+        "artistName": "Ny Aiga",
+        "id": 5077,
+        "lyrics": "gukey",
+        "style": "Country",
+        "isFavorite": false,
+        "upvotes": 10,
+        "downvotes": 2
+    },
+    {
+        "songTitle": "Trust And Obey",
+        "artistName": "Don Moen",
+        "id": 16598309,
+        "lyrics": "gukey",
+        "style": "Slow",
+        "isFavorite": false,
+        "upvotes": 5,
+        "downvotes": 3
+    },
+    {
+        "songTitle": "Westlife",
+        "artistName": "Fool Again",
+        "id": 736858,
+        "lyrics": "gukey",
+        "style": "Rock",
+        "isFavorite": false,
+        "upvotes": 22,
+        "downvotes": 1
+    },
+    {
+        "songTitle": "yiuwekytol",
+        "artistName": "urywtilhkrkt",
+        "id": 1,
+        "lyrics": "gukey",
+        "style": "fgfuisjkhgs",
+        "isFavorite": false,
+        "upvotes": 2,
+        "downvotes": 1
+    }
+]
