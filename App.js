@@ -1,9 +1,43 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Context } from "./Context";
+
+import { Switch, Route, Link } from "react-router-dom";
+import PopularSongs from "./PopularSongs";
+import Styles from './Style';
+import AddSongs from './AddSongs';
+import Cart from "./Cart";
 
 function App() {
-    return(
+    const { songs } = useContext(Context);
+    return (
         <div>
-            <h1>Hit Parade</h1>
+            <header>
+                <h1>Hit Parade</h1>
+                <div className="header">
+                    <Link to='/'>Popular Songs</Link>
+                    <Link to="/style">Style</Link>
+                    <Link to="/add">Add</Link>
+                    <Link to="/cart">Cart</Link>
+                </div>
+            </header>
+            <div>
+                <Switch>
+                    <Route exact path="/">
+                        {songs.map((song) => (
+                            <PopularSongs key={song.id} song={song} />
+                        ))}
+                    </Route>
+                    <Route path="/style">
+                        <Styles />
+                    </Route>
+                    <Route path="/add">
+                        <AddSongs />
+                    </Route>
+                    <Route path="/cart">
+                        <Cart />
+                    </Route>
+                </Switch>
+            </div>
         </div>
     )
 }

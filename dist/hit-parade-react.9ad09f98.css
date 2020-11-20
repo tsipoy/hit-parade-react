@@ -1,5 +1,45 @@
 body {
     margin: 0;
+    background-color: pink;
 }
+
+html {
+    font-family: 'Courier New', Courier, monospace;
+    color: #0e172c;
+}
+
+
+
+h1 {
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: auto;
+    max-width: 800px; 
+    padding: 32px;
+    background-color: #fffffe;
+    margin-block-end: 32px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: auto;
+    max-width: 800px;
+    background-color:#f9f8fc;
+    padding: 16px;
+}
+
+.wrapper:nth-child(2n) {
+    background-color: #d9d4e7;
+}
+
 
 /*# sourceMappingURL=/hit-parade-react.9ad09f98.css.map */

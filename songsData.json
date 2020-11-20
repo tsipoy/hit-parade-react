@@ -1,13 +1,14 @@
 [
     {
         "songTitle": "Tompo tsy foiko",
-        "artistName": "Ny Aiga",
+        "artistName": "Ny Ainga",
         "id": 5077,
         "lyrics": "gukey",
         "style": "Country",
         "isFavorite": false,
         "upvotes": 10,
-        "downvotes": 2
+        "downvotes": 2,
+        "price": 3000 
     },
     {
         "songTitle": "Trust And Obey",
@@ -17,7 +18,8 @@
         "style": "Slow",
         "isFavorite": false,
         "upvotes": 5,
-        "downvotes": 3
+        "downvotes": 3,
+        "price": 3500
     },
     {
         "songTitle": "Westlife",
@@ -27,7 +29,8 @@
         "style": "Rock",
         "isFavorite": false,
         "upvotes": 22,
-        "downvotes": 1
+        "downvotes": 1,
+        "price": 2500
     },
     {
         "songTitle": "Let Her Go",
@@ -37,7 +40,8 @@
         "style": "Folk",
         "isFavorite": false,
         "upvotes": 24,
-        "downvotes": 1
+        "downvotes": 1,
+        "price": 4000
     },
     {
         "songTitle": "400 volt",
@@ -47,6 +51,7 @@
         "style": "Salegy",
         "isFavorite": false,
         "upvotes": 30,
-        "downvotes": 6
+        "downvotes": 6,
+        "price": 3500
     }
 ]
