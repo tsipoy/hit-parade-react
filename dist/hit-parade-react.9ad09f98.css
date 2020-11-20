@@ -22,6 +22,8 @@ h1 {
     margin: auto;
     max-width: 800px; 
     padding: 32px;
+    padding-inline-start: 16px;
+    padding-inline-end: 16px;
     background-color: #fffffe;
     margin-block-end: 32px;
 }
@@ -41,5 +43,45 @@ h1 {
     background-color: #d9d4e7;
 }
 
+.fav {
+    color: #a786df;
+}
+
+.style {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    margin: auto;
+    max-width: 800px;
+}
+
+.style button {
+    font-size: 24px;
+    background-color: transparent;
+    padding-block-end: 16px;
+    border: none;
+    text-align: left;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    max-width: 800px;
+}
+
+label {
+    padding-block-end: 16px;
+}
+
+input, select {
+    padding-block-end: 16px;
+    padding-block-start: 16px;
+    width: 100%;
+}
+
+textarea {
+    width: 100%;
+}
 
 /*# sourceMappingURL=/hit-parade-react.9ad09f98.css.map */

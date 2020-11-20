@@ -23,7 +23,11 @@ function App() {
             <div>
                 <Switch>
                     <Route exact path="/">
-                        {songs.map((song) => (
+                        {songs.sort((itemA, itemB) => {
+                            const voteA = itemA.upvotes - itemA.downvotes;
+                            const voteB = itemB.upvotes - itemB.downvotes;
+                            return voteB - voteA;
+                        }).map((song) => (
                             <PopularSongs key={song.id} song={song} />
                         ))}
                     </Route>
