@@ -5,6 +5,7 @@ const Context = React.createContext();
 
 function ContextProvider({children}) {
     const [songs, setSongs] = useState(Songs);
+    const [carts, setCarts] = useState([]);
 
     function toggleFavorite(id) {
         const newSongsArray = songs.map(song => {
@@ -45,12 +46,28 @@ function ContextProvider({children}) {
         setSongs(downvoted);
     }
 
+    function addToCarts(item) {
+        setCarts(prevItems => [...prevItems, item])
+    }
+
+    function deleteItems(itemId) {
+        setCarts(prevItems => prevItems.filter(item => item.id !== itemId))
+    }
+
     useEffect(() => {
         setSongs(Songs)
     }, [])
 
     return (
-        <Context.Provider value={{songs, toggleFavorite, handleUpvotes, handleDownvotes}}>
+        <Context.Provider value={{
+            songs, 
+            toggleFavorite, 
+            handleUpvotes, 
+            handleDownvotes, 
+            carts, 
+            addToCarts,
+            deleteItems,
+            }}>
             {children}
         </Context.Provider>
     )

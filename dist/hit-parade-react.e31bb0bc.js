@@ -33932,6 +33932,7 @@ function ContextProvider({
   children
 }) {
   const [songs, setSongs] = (0, _react.useState)(_songsData.default);
+  const [carts, setCarts] = (0, _react.useState)([]);
 
   function toggleFavorite(id) {
     const newSongsArray = songs.map(song => {
@@ -33972,6 +33973,14 @@ function ContextProvider({
     setSongs(downvoted);
   }
 
+  function addToCarts(item) {
+    setCarts(prevItems => [...prevItems, item]);
+  }
+
+  function deleteItems(itemId) {
+    setCarts(prevItems => prevItems.filter(item => item.id !== itemId));
+  }
+
   (0, _react.useEffect)(() => {
     setSongs(_songsData.default);
   }, []);
@@ -33980,7 +33989,10 @@ function ContextProvider({
       songs,
       toggleFavorite,
       handleUpvotes,
-      handleDownvotes
+      handleDownvotes,
+      carts,
+      addToCarts,
+      deleteItems
     }
   }, children);
 }
@@ -34006,9 +34018,11 @@ function PopularSongs({
   const {
     toggleFavorite,
     handleUpvotes,
-    handleDownvotes
-  } = (0, _react.useContext)(_Context.Context); // const [upvote, setUpvotes] = useState(song.upvotes);
-  // const [downvote, setDownvotes] = useState(song.downvotes);
+    handleDownvotes,
+    carts,
+    addToCarts,
+    deleteItems
+  } = (0, _react.useContext)(_Context.Context);
 
   function isFavorited() {
     if (song.isFavorite) {
@@ -34022,12 +34036,23 @@ function PopularSongs({
       className: "ri-heart-line",
       onClick: () => toggleFavorite(song.id)
     });
-  } // function isUpvoted() {
-  //     if(song.upvotes) {
-  //         return <i className="ri-arrow-up-line" onClick={() => setUpvotes(upvote + 1)}></i>    
-  //     }
-  // }
+  }
 
+  function addCarts() {
+    const cardId = carts.some(cart => cart.id === song.id);
+
+    if (cardId) {
+      return /*#__PURE__*/_react.default.createElement("i", {
+        className: "ri-shopping-cart-fill",
+        onClick: () => deleteItems(song.id)
+      });
+    }
+
+    return /*#__PURE__*/_react.default.createElement("i", {
+      className: "ri-shopping-cart-line",
+      onClick: () => addToCarts(song)
+    }); // }
+  }
 
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "wrapper"
@@ -34036,10 +34061,8 @@ function PopularSongs({
     onClick: () => handleUpvotes(song.id)
   })), /*#__PURE__*/_react.default.createElement("p", null, song.downvotes, /*#__PURE__*/_react.default.createElement("i", {
     className: "ri-arrow-down-line",
-    onClick: () => handleDownvotes(downvote + 1)
-  })), /*#__PURE__*/_react.default.createElement("i", {
-    className: "ri-shopping-cart-line"
-  }), /*#__PURE__*/_react.default.createElement("i", {
+    onClick: () => handleDownvotes(song.id)
+  })), addCarts(), /*#__PURE__*/_react.default.createElement("i", {
     className: "ri-more-line"
   }));
 }
@@ -34121,7 +34144,36 @@ function AddSongs() {
 
 var _default = AddSongs;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"Cart.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"CartItems.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = CartItems;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _Context = require("./Context");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function CartItems({
+  song
+}) {
+  const {
+    deleteItems
+  } = (0, _react.useContext)(_Context.Context);
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "wrapper"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "ri-delete-bin-5-line",
+    onClick: () => deleteItems(song.id)
+  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, song.songTitle), /*#__PURE__*/_react.default.createElement("p", null, song.artistName)), /*#__PURE__*/_react.default.createElement("p", null, "Price: ", song.price));
+}
+},{"react":"node_modules/react/index.js","./Context":"Context.js"}],"Cart.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34129,17 +34181,36 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
+
+var _Context = require("./Context");
+
+var _CartItems = _interopRequireDefault(require("./CartItems"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Cart() {
-  return /*#__PURE__*/_react.default.createElement("p", null, "Cart");
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function Cart({
+  price
+}) {
+  const {
+    carts,
+    addToCarts
+  } = (0, _react.useContext)(_Context.Context);
+  const cartElement = carts.map(song => /*#__PURE__*/_react.default.createElement(_CartItems.default, {
+    key: song.id,
+    song: song
+  }));
+  const total = carts.reduce((acc, currentValue) => acc + currentValue.price, 0);
+  return /*#__PURE__*/_react.default.createElement("div", null, addToCarts && /*#__PURE__*/_react.default.createElement("div", null, cartElement), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", null, "Buy"), /*#__PURE__*/_react.default.createElement("p", null, "Total: ", total, " Ar")));
 }
 
 var _default = Cart;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./Context":"Context.js","./CartItems":"CartItems.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34246,7 +34317,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51369" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54234" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

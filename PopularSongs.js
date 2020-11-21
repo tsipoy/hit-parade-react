@@ -1,10 +1,15 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Context } from './Context'
 
 function PopularSongs({ song }) {
-    const { toggleFavorite,  handleUpvotes, handleDownvotes } = useContext(Context);
-    // const [upvote, setUpvotes] = useState(song.upvotes);
-    // const [downvote, setDownvotes] = useState(song.downvotes);
+    const { 
+        toggleFavorite, 
+        handleUpvotes, 
+        handleDownvotes,
+        carts,
+        addToCarts,
+        deleteItems,
+    } = useContext(Context);
 
     function isFavorited() {
         if (song.isFavorite) {
@@ -15,13 +20,15 @@ function PopularSongs({ song }) {
         )
     }
 
+    function addCarts() {
+        const cardId = carts.some(cart => cart.id === song.id)
 
-    // function isUpvoted() {
-    //     if(song.upvotes) {
-    //         return <i className="ri-arrow-up-line" onClick={() => setUpvotes(upvote + 1)}></i>    
-    //     }
-    // }
-
+        if(cardId) {
+            return <i className="ri-shopping-cart-fill"onClick={() => deleteItems(song.id)}></i>
+        } 
+            return <i className="ri-shopping-cart-line" onClick={() => addToCarts(song)}></i>
+        // }
+    }
 
     return (
         <div className="wrapper">
@@ -31,8 +38,8 @@ function PopularSongs({ song }) {
                 <p>{song.artistName}</p>
             </div>
             <p>{song.upvotes}<i className="ri-arrow-up-line" onClick={() => handleUpvotes(song.id)}></i></p>
-            <p>{song.downvotes}<i className="ri-arrow-down-line" onClick={() => handleDownvotes(downvote + 1)}></i></p>
-            <i className="ri-shopping-cart-line"></i>
+            <p>{song.downvotes}<i className="ri-arrow-down-line" onClick={() => handleDownvotes(song.id)}></i></p>
+            {addCarts()}
             <i className="ri-more-line"></i>
         </div>
     )
