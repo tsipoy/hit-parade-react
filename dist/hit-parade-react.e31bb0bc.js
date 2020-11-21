@@ -33946,13 +33946,41 @@ function ContextProvider({
     setSongs(newSongsArray);
   }
 
+  function handleUpvotes(id) {
+    const upvoted = songs.map(song => {
+      if (song.id === id) {
+        return { ...song,
+          upvotes: song.upvotes + 1
+        };
+      }
+
+      return song;
+    });
+    setSongs(upvoted);
+  }
+
+  function handleDownvotes(id) {
+    const downvoted = songs.map(song => {
+      if (song.id === id) {
+        return { ...song,
+          downvotes: song.downvotes + 1
+        };
+      }
+
+      return song;
+    });
+    setSongs(downvoted);
+  }
+
   (0, _react.useEffect)(() => {
     setSongs(_songsData.default);
   }, []);
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
       songs,
-      toggleFavorite
+      toggleFavorite,
+      handleUpvotes,
+      handleDownvotes
     }
   }, children);
 }
@@ -33976,8 +34004,11 @@ function PopularSongs({
   song
 }) {
   const {
-    toggleFavorite
-  } = (0, _react.useContext)(_Context.Context);
+    toggleFavorite,
+    handleUpvotes,
+    handleDownvotes
+  } = (0, _react.useContext)(_Context.Context); // const [upvote, setUpvotes] = useState(song.upvotes);
+  // const [downvote, setDownvotes] = useState(song.downvotes);
 
   function isFavorited() {
     if (song.isFavorite) {
@@ -33991,14 +34022,21 @@ function PopularSongs({
       className: "ri-heart-line",
       onClick: () => toggleFavorite(song.id)
     });
-  }
+  } // function isUpvoted() {
+  //     if(song.upvotes) {
+  //         return <i className="ri-arrow-up-line" onClick={() => setUpvotes(upvote + 1)}></i>    
+  //     }
+  // }
+
 
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "wrapper"
   }, isFavorited(), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, song.songTitle), /*#__PURE__*/_react.default.createElement("p", null, song.artistName)), /*#__PURE__*/_react.default.createElement("p", null, song.upvotes, /*#__PURE__*/_react.default.createElement("i", {
-    className: "ri-arrow-up-line"
+    className: "ri-arrow-up-line",
+    onClick: () => handleUpvotes(song.id)
   })), /*#__PURE__*/_react.default.createElement("p", null, song.downvotes, /*#__PURE__*/_react.default.createElement("i", {
-    className: "ri-arrow-down-line"
+    className: "ri-arrow-down-line",
+    onClick: () => handleDownvotes(downvote + 1)
   })), /*#__PURE__*/_react.default.createElement("i", {
     className: "ri-shopping-cart-line"
   }), /*#__PURE__*/_react.default.createElement("i", {
@@ -34208,7 +34246,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65437" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51369" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
