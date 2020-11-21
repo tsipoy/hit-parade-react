@@ -33933,6 +33933,7 @@ function ContextProvider({
 }) {
   const [songs, setSongs] = (0, _react.useState)(_songsData.default);
   const [carts, setCarts] = (0, _react.useState)([]);
+  const [addToLists, setAddToLists] = (0, _react.useState)([]);
 
   function toggleFavorite(id) {
     const newSongsArray = songs.map(song => {
@@ -33981,6 +33982,38 @@ function ContextProvider({
     setCarts(prevItems => prevItems.filter(item => item.id !== itemId));
   }
 
+  function emptyCart() {
+    setCarts([]);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    console.log(form);
+    let title = form.title.value;
+    let artist = form.artist.value;
+    let lyrics = form.lyrics.value;
+    let style = form.style.value;
+    let price = form.price.value;
+    console.log(lyrics);
+    console.log(style);
+    const newLists = {
+      songTitle: title,
+      id: new Date(),
+      artistName: artist,
+      id: new Date(),
+      lyrics: lyrics,
+      style: style,
+      isFavorite: false,
+      upvotes: 0,
+      downvotes: 0,
+      price: price
+    }; // songs.push(newLists);
+
+    form.reset();
+    setSongs([...songs, newLists]);
+  }
+
   (0, _react.useEffect)(() => {
     setSongs(_songsData.default);
   }, []);
@@ -33992,7 +34025,9 @@ function ContextProvider({
       handleDownvotes,
       carts,
       addToCarts,
-      deleteItems
+      deleteItems,
+      emptyCart,
+      handleSubmit
     }
   }, children);
 }
@@ -34114,37 +34149,57 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Context = require("./Context");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function AddSongs() {
-  return /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
-    placeholder: "Title"
-  })), /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
-    placeholder: "Artist"
-  })), /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
-    placeholder: "Price"
-  })), /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("select", {
-    placeholder: "Style"
-  }, /*#__PURE__*/_react.default.createElement("option", {
-    value: "salegy"
-  }, "Salegy"), /*#__PURE__*/_react.default.createElement("option", {
-    value: "rock"
-  }, "Rock"), /*#__PURE__*/_react.default.createElement("option", {
-    value: "folk"
-  }, "Folk"), /*#__PURE__*/_react.default.createElement("option", {
-    value: "country"
-  }, "Country"), /*#__PURE__*/_react.default.createElement("option", {
-    value: "slow"
-  }, "Slow"))), /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("textarea", {
-    placeholder: "Lyrics"
-  })), /*#__PURE__*/_react.default.createElement("button", null, "ADD"));
+  const {
+    handleSubmit
+  } = (0, _react.useContext)(_Context.Context); // const lists = addToLists.map(list =>
+  // )
+
+  return (
+    /*#__PURE__*/
+    // <div>{lists}</div>  
+    _react.default.createElement("form", {
+      onSubmit: handleSubmit
+    }, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
+      placeholder: "Title",
+      name: "title"
+    })), /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
+      placeholder: "Artist",
+      name: "artist"
+    })), /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
+      placeholder: "Price",
+      name: "price"
+    })), /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("select", {
+      placeholder: "Style",
+      name: "style"
+    }, /*#__PURE__*/_react.default.createElement("option", {
+      value: "salegy"
+    }, "Salegy"), /*#__PURE__*/_react.default.createElement("option", {
+      value: "rock"
+    }, "Rock"), /*#__PURE__*/_react.default.createElement("option", {
+      value: "folk"
+    }, "Folk"), /*#__PURE__*/_react.default.createElement("option", {
+      value: "country"
+    }, "Country"), /*#__PURE__*/_react.default.createElement("option", {
+      value: "slow"
+    }, "Slow"))), /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("textarea", {
+      placeholder: "Lyrics",
+      name: "lyrics"
+    })), /*#__PURE__*/_react.default.createElement("button", null, "ADD"))
+  );
 }
 
 var _default = AddSongs;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"CartItems.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./Context":"Context.js"}],"CartItems.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34198,14 +34253,22 @@ function Cart({
 }) {
   const {
     carts,
-    addToCarts
+    addToCarts,
+    emptyCart
   } = (0, _react.useContext)(_Context.Context);
   const cartElement = carts.map(song => /*#__PURE__*/_react.default.createElement(_CartItems.default, {
     key: song.id,
     song: song
   }));
   const total = carts.reduce((acc, currentValue) => acc + currentValue.price, 0);
-  return /*#__PURE__*/_react.default.createElement("div", null, addToCarts && /*#__PURE__*/_react.default.createElement("div", null, cartElement), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", null, "Buy"), /*#__PURE__*/_react.default.createElement("p", null, "Total: ", total, " Ar")));
+
+  const cartEmpty = () => {
+    emptyCart();
+  };
+
+  return /*#__PURE__*/_react.default.createElement("div", null, addToCarts && /*#__PURE__*/_react.default.createElement("div", null, cartElement), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+    onClick: cartEmpty
+  }, "Buy"), /*#__PURE__*/_react.default.createElement("p", null, "Total: ", total, " Ar")));
 }
 
 var _default = Cart;

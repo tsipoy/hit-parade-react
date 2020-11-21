@@ -84,4 +84,13 @@ textarea {
     width: 100%;
 }
 
+form button {
+    background-color: white;
+    width: fit-content;
+    padding-block-end: 16px;
+    padding-block-start: 16px;
+    padding-inline-end: 16px;
+    padding-inline-start: 16px;
+}
+
 /*# sourceMappingURL=/hit-parade-react.9ad09f98.css.map */

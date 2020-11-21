@@ -83,3 +83,12 @@ input, select {
 textarea {
     width: 100%;
 }
+
+form button {
+    background-color: white;
+    width: fit-content;
+    padding-block-end: 16px;
+    padding-block-start: 16px;
+    padding-inline-end: 16px;
+    padding-inline-start: 16px;
+}

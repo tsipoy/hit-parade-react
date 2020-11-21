@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Songs from './songsData.json'
 
 const Context = React.createContext();
 
-function ContextProvider({children}) {
+function ContextProvider({ children }) {
     const [songs, setSongs] = useState(Songs);
     const [carts, setCarts] = useState([]);
+    const [addToLists, setAddToLists] = useState([]);
 
     function toggleFavorite(id) {
         const newSongsArray = songs.map(song => {
@@ -54,23 +55,59 @@ function ContextProvider({children}) {
         setCarts(prevItems => prevItems.filter(item => item.id !== itemId))
     }
 
+    function emptyCart() {
+        setCarts([]);
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        const form = e.target;
+        console.log(form);
+        let title = form.title.value;
+        let artist  = form.artist.value;
+        let lyrics = form.lyrics.value;
+        let style = form.style.value;
+        let  price = form. price.value;
+
+        console.log(lyrics);
+        console.log(style)
+
+        const newLists = {
+            songTitle: title,
+            id: new Date(),
+            artistName: artist,
+            id: new Date(),
+            lyrics: lyrics,
+            style: style,
+            isFavorite: false ,
+            upvotes: 0,
+            downvotes: 0,
+            price: price,
+        }
+        // songs.push(newLists);
+        form.reset()
+        setSongs([...songs, newLists])    
+    }
+
     useEffect(() => {
-        setSongs(Songs)
+        setSongs(Songs);
     }, [])
 
     return (
         <Context.Provider value={{
-            songs, 
-            toggleFavorite, 
-            handleUpvotes, 
-            handleDownvotes, 
-            carts, 
+            songs,
+            toggleFavorite,
+            handleUpvotes,
+            handleDownvotes,
+            carts,
             addToCarts,
             deleteItems,
-            }}>
+            emptyCart,
+            handleSubmit,
+        }}>
             {children}
         </Context.Provider>
     )
 }
 
-export {ContextProvider, Context}
+export { ContextProvider, Context }
