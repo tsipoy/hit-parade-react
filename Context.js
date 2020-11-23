@@ -6,14 +6,29 @@ const Context = React.createContext();
 function ContextProvider({ children }) {
     const [songs, setSongs] = useState(Songs);
     const [carts, setCarts] = useState([]);
-    const [addToLists, setAddToLists] = useState([]);
+    const [styleLists, setStyleList] = useState(['Salegy', 'Rock', 'Slow', 'Country', 'Folk']);
+
+    useEffect(() => {
+        const lsSongs = JSON.parse(localStorage.getItem('song'));
+        lsSongs ? setSongs(lsSongs) : setSongs(Songs);
+        const lsCarts = JSON.parse(localStorage.getItem("cartItems"));
+        lsCarts && setCarts(lsCarts);
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('songs', JSON.stringify(songs))
+    }, [songs])
+
+    useEffect(() => {
+        localStorage.setItem('cartItems', JSON.stringify(carts))
+    }, [carts])
 
     function toggleFavorite(id) {
         const newSongsArray = songs.map(song => {
             if (song.id === id) {
                 return {
                     ...song,
-                    isFavorite: !song.isFavorite,
+                    isFavorited: !song.isFavorited,
                 }
             }
             return song;
@@ -67,14 +82,14 @@ function ContextProvider({ children }) {
         let artist  = form.artist.value;
         let lyrics = form.lyrics.value;
         let style = form.style.value;
-        let  price = form. price.value;
+        let  price = Number(form.price.value);
 
         console.log(lyrics);
         console.log(style)
 
         const newLists = {
             songTitle: title,
-            id: new Date(),
+            id: Date.now(),
             artistName: artist,
             id: new Date(),
             lyrics: lyrics,
@@ -88,6 +103,10 @@ function ContextProvider({ children }) {
         form.reset()
         setSongs([...songs, newLists])    
     }
+
+    // function findStyle() {
+    //     {songs.map(songStyle => console.log(songStyle.style) )}
+    // }
 
     useEffect(() => {
         setSongs(Songs);
@@ -104,6 +123,7 @@ function ContextProvider({ children }) {
             deleteItems,
             emptyCart,
             handleSubmit,
+            styleLists
         }}>
             {children}
         </Context.Provider>

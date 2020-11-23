@@ -9,7 +9,6 @@ html {
 }
 
 
-
 h1 {
     text-align: center;
 }
@@ -28,6 +27,13 @@ h1 {
     margin-block-end: 32px;
 }
 
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    font-weight: bold;    
+}
 .wrapper {
     display: flex;
     flex-direction: row;
@@ -84,13 +90,25 @@ textarea {
     width: 100%;
 }
 
-form button {
+.buy {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: baseline;
+}
+
+form button,
+.buyButton {
     background-color: white;
     width: fit-content;
     padding-block-end: 16px;
     padding-block-start: 16px;
     padding-inline-end: 16px;
     padding-inline-start: 16px;
+}
+
+.buyButton {
+    margin-block-start: 16px;
 }
 
 /*# sourceMappingURL=/hit-parade-react.9ad09f98.css.map */

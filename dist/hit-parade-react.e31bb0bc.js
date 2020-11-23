@@ -33860,50 +33860,50 @@ module.exports = [{
   "id": 5077,
   "lyrics": "gukey",
   "style": "Country",
-  "isFavorite": false,
+  "isFavorited": false,
   "upvotes": 10,
   "downvotes": 2,
-  "price": 3000
+  "price": 100
 }, {
   "songTitle": "Trust And Obey",
   "artistName": "Don Moen",
   "id": 1659,
   "lyrics": "gukey",
   "style": "Slow",
-  "isFavorite": false,
+  "isFavorited": false,
   "upvotes": 5,
   "downvotes": 3,
-  "price": 3500
+  "price": 150
 }, {
   "songTitle": "Westlife",
   "artistName": "Fool Again",
   "id": 7368,
   "lyrics": "gukey",
   "style": "Rock",
-  "isFavorite": false,
+  "isFavorited": false,
   "upvotes": 22,
   "downvotes": 1,
-  "price": 2500
+  "price": 50
 }, {
   "songTitle": "Let Her Go",
   "artistName": "Passenger",
   "id": 9058,
   "lyrics": "gukey",
   "style": "Folk",
-  "isFavorite": false,
+  "isFavorited": false,
   "upvotes": 24,
   "downvotes": 1,
-  "price": 4000
+  "price": 100
 }, {
   "songTitle": "400 volt",
   "artistName": "Wawa",
   "id": 1010,
   "lyrics": "gukey",
   "style": "Salegy",
-  "isFavorite": false,
+  "isFavorited": false,
   "upvotes": 30,
   "downvotes": 6,
-  "price": 3500
+  "price": 300
 }];
 },{}],"Context.js":[function(require,module,exports) {
 "use strict";
@@ -33933,13 +33933,25 @@ function ContextProvider({
 }) {
   const [songs, setSongs] = (0, _react.useState)(_songsData.default);
   const [carts, setCarts] = (0, _react.useState)([]);
-  const [addToLists, setAddToLists] = (0, _react.useState)([]);
+  const [styleLists, setStyleList] = (0, _react.useState)(['Salegy', 'Rock', 'Slow', 'Country', 'Folk']);
+  (0, _react.useEffect)(() => {
+    const lsSongs = JSON.parse(localStorage.getItem('song'));
+    lsSongs ? setSongs(lsSongs) : setSongs(_songsData.default);
+    const lsCarts = JSON.parse(localStorage.getItem("cartItems"));
+    lsCarts && setCarts(lsCarts);
+  }, []);
+  (0, _react.useEffect)(() => {
+    localStorage.setItem('songs', JSON.stringify(songs));
+  }, [songs]);
+  (0, _react.useEffect)(() => {
+    localStorage.setItem('cartItems', JSON.stringify(carts));
+  }, [carts]);
 
   function toggleFavorite(id) {
     const newSongsArray = songs.map(song => {
       if (song.id === id) {
         return { ...song,
-          isFavorite: !song.isFavorite
+          isFavorited: !song.isFavorited
         };
       }
 
@@ -33994,12 +34006,12 @@ function ContextProvider({
     let artist = form.artist.value;
     let lyrics = form.lyrics.value;
     let style = form.style.value;
-    let price = form.price.value;
+    let price = Number(form.price.value);
     console.log(lyrics);
     console.log(style);
     const newLists = {
       songTitle: title,
-      id: new Date(),
+      id: Date.now(),
       artistName: artist,
       id: new Date(),
       lyrics: lyrics,
@@ -34012,7 +34024,10 @@ function ContextProvider({
 
     form.reset();
     setSongs([...songs, newLists]);
-  }
+  } // function findStyle() {
+  //     {songs.map(songStyle => console.log(songStyle.style) )}
+  // }
+
 
   (0, _react.useEffect)(() => {
     setSongs(_songsData.default);
@@ -34027,7 +34042,8 @@ function ContextProvider({
       addToCarts,
       deleteItems,
       emptyCart,
-      handleSubmit
+      handleSubmit,
+      styleLists
     }
   }, children);
 }
@@ -34040,6 +34056,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
+
+var _reactRouterDom = require("react-router-dom");
 
 var _Context = require("./Context");
 
@@ -34060,7 +34078,7 @@ function PopularSongs({
   } = (0, _react.useContext)(_Context.Context);
 
   function isFavorited() {
-    if (song.isFavorite) {
+    if (song.isFavorited) {
       return /*#__PURE__*/_react.default.createElement("i", {
         className: "ri-heart-fill fav",
         onClick: () => toggleFavorite(song.id)
@@ -34078,7 +34096,7 @@ function PopularSongs({
 
     if (cardId) {
       return /*#__PURE__*/_react.default.createElement("i", {
-        className: "ri-shopping-cart-fill",
+        className: "ri-shopping-cart-fill fav",
         onClick: () => deleteItems(song.id)
       });
     }
@@ -34097,14 +34115,16 @@ function PopularSongs({
   })), /*#__PURE__*/_react.default.createElement("p", null, song.downvotes, /*#__PURE__*/_react.default.createElement("i", {
     className: "ri-arrow-down-line",
     onClick: () => handleDownvotes(song.id)
-  })), addCarts(), /*#__PURE__*/_react.default.createElement("i", {
+  })), addCarts(), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: `/song/${song.id}`
+  }, /*#__PURE__*/_react.default.createElement("i", {
     className: "ri-more-line"
-  }));
+  })));
 }
 
 var _default = PopularSongs;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./Context":"Context.js"}],"Style.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./Context":"Context.js"}],"Style.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34114,6 +34134,8 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactRouterDom = require("react-router-dom");
+
 var _Context = require("./Context");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -34122,26 +34144,26 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function Styles() {
   const {
-    songs
+    styleLists
   } = (0, _react.useContext)(_Context.Context);
+
+  function findStyle() {
+    return styleLists.map(songStyles => /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+      key: songStyles,
+      to: "/style"
+    }, /*#__PURE__*/_react.default.createElement("button", null, /*#__PURE__*/_react.default.createElement("i", {
+      className: "ri-headphone-fill"
+    }), songStyles)));
+  }
+
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "style"
-  }, /*#__PURE__*/_react.default.createElement("button", null, /*#__PURE__*/_react.default.createElement("i", {
-    className: "ri-headphone-fill"
-  }), "Slow"), /*#__PURE__*/_react.default.createElement("button", null, /*#__PURE__*/_react.default.createElement("i", {
-    className: "ri-headphone-fill"
-  }), "Folk"), /*#__PURE__*/_react.default.createElement("button", null, /*#__PURE__*/_react.default.createElement("i", {
-    className: "ri-headphone-fill"
-  }), "Country"), /*#__PURE__*/_react.default.createElement("button", null, /*#__PURE__*/_react.default.createElement("i", {
-    className: "ri-headphone-fill"
-  }), "Rock"), /*#__PURE__*/_react.default.createElement("button", null, /*#__PURE__*/_react.default.createElement("i", {
-    className: "ri-headphone-fill"
-  }), "Salegy"));
+  }, findStyle());
 }
 
 var _default = Styles;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./Context":"Context.js"}],"AddSongs.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./Context":"Context.js"}],"AddSongs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34192,7 +34214,8 @@ function AddSongs() {
       value: "slow"
     }, "Slow"))), /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("textarea", {
       placeholder: "Lyrics",
-      name: "lyrics"
+      name: "lyrics",
+      rows: "10"
     })), /*#__PURE__*/_react.default.createElement("button", null, "ADD"))
   );
 }
@@ -34248,9 +34271,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function Cart({
-  price
-}) {
+function Cart() {
   const {
     carts,
     addToCarts,
@@ -34266,8 +34287,11 @@ function Cart({
     emptyCart();
   };
 
-  return /*#__PURE__*/_react.default.createElement("div", null, addToCarts && /*#__PURE__*/_react.default.createElement("div", null, cartElement), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
-    onClick: cartEmpty
+  return /*#__PURE__*/_react.default.createElement("div", null, addToCarts && /*#__PURE__*/_react.default.createElement("div", null, cartElement), /*#__PURE__*/_react.default.createElement("div", {
+    className: "buy"
+  }, carts.length === 0 ? "Empty cart" : /*#__PURE__*/_react.default.createElement("button", {
+    onClick: cartEmpty,
+    className: "buyButton"
   }, "Buy"), /*#__PURE__*/_react.default.createElement("p", null, "Total: ", total, " Ar")));
 }
 
@@ -34309,13 +34333,15 @@ function App() {
     className: "header"
   }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/"
-  }, "Popular Songs"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+  }, "\uD83D\uDD25 Popular Songs"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/style"
-  }, "Style"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+  }, "\uD83D\uDC96 Style"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/add"
-  }, "Add"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "ri-play-list-add-fill"
+  }), " Add"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/cart"
-  }, "Cart"))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  }, "\uD83D\uDED2 Cart"))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/"
   }, songs.sort((itemA, itemB) => {
@@ -34380,7 +34406,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54234" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60382" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

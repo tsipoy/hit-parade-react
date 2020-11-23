@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Context } from "./Context";
-
 import { Switch, Route, Link } from "react-router-dom";
 import PopularSongs from "./PopularSongs";
 import Styles from './Style';
@@ -14,10 +13,10 @@ function App() {
             <header>
                 <h1>Hit Parade</h1>
                 <div className="header">
-                    <Link to='/'>Popular Songs</Link>
-                    <Link to="/style">Style</Link>
-                    <Link to="/add">Add</Link>
-                    <Link to="/cart">Cart</Link>
+                    <Link to='/'>🔥 Popular Songs</Link>
+                    <Link to="/style">💖 Style</Link>
+                    <Link to="/add"><i className="ri-play-list-add-fill"></i> Add</Link>
+                    <Link to="/cart">🛒 Cart</Link>
                 </div>
             </header>
             <div>

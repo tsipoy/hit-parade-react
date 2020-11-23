@@ -30,7 +30,7 @@ function AddSongs() {
                 </select>
             </label>
             <label>
-                <textarea placeholder="Lyrics" name="lyrics"></textarea>
+                <textarea placeholder="Lyrics" name="lyrics" rows="10"></textarea>
             </label>
             <button >ADD</button>
         </form>  

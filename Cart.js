@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import {Context} from "./Context";
 import CartItems from "./CartItems";
 
-function Cart({price}) {
+function Cart() {
     const {carts, addToCarts, emptyCart} = useContext(Context);
     const cartElement = carts.map(song => (
         <CartItems key={song.id} song={song} />
@@ -17,8 +17,10 @@ function Cart({price}) {
             {addToCarts && 
                 <div>{cartElement}</div>
             }
-            <div>
-                <button onClick={cartEmpty} >Buy</button>
+            <div className="buy">
+                {carts.length === 0 ? "Empty cart" : 
+                    <button onClick={cartEmpty} className="buyButton" >Buy</button>
+                }
                 <p>Total: {total} Ar</p>
             </div>
         </div>

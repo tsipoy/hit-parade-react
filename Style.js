@@ -1,17 +1,24 @@
-import React, { useContext } from 'react';
-import {Context} from "./Context"
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { Context } from "./Context";
 
 function Styles() {
-    const {songs} = useContext(Context);
+  const { styleLists } = useContext(Context);
 
-    return(
-        <div className="style">
-            <button><i className="ri-headphone-fill"></i>Slow</button>
-            <button><i className="ri-headphone-fill"></i>Folk</button>
-            <button><i className="ri-headphone-fill"></i>Country</button>
-            <button><i className="ri-headphone-fill"></i>Rock</button>
-            <button><i className="ri-headphone-fill"></i>Salegy</button>
-        </div>
-    )
+  function findStyle() {
+    return styleLists.map((songStyles) => (
+      <Link key={songStyles} to="/style">
+        <button>
+          <i className="ri-headphone-fill"></i>{songStyles}
+        </button>
+      </Link>
+    ));
+  }
+
+  return (
+    <div className="style">
+      {findStyle()}
+    </div>
+  );
 }
-export default Styles
+export default Styles;
