@@ -7,7 +7,7 @@ function Styles() {
 
   function findStyle() {
     return styleLists.map((songStyles) => (
-      <Link key={songStyles} to="/style">
+      <Link key={songStyles} to={`/style/${songStyles}`}>
         <button>
           <i className="ri-headphone-fill"></i>{songStyles}
         </button>

@@ -3,8 +3,9 @@ import { Link, useParams } from 'react-router-dom'
 import { Context } from './Context';
 
 export default function DisplayStyle() {
-    const { styleName} = useParams();
+    const { styleName } = useParams();
     const { songs } = useContext(Context);
+
     const songTemplate = (song) => {
         return (
             <Link to={`/song/${song.id}`} key={song.id}>
@@ -16,11 +17,20 @@ export default function DisplayStyle() {
         )
     }
 
-    const filteredSong = songs.filter(style === styleName).map(songTemplate);
-    
-    return (
-        <div>
-          {filteredSong}  
-        </div>
-    )
+    function showSongsFilteredByStyle() {
+		const filteredSongs = songs
+			.filter(song => song.style === styleName)
+			.map(songTemplate);
+		if (filteredSongs.length === 0) {
+			return <p>No results.</p>;
+		}
+		return filteredSongs;
+	}
+
+	return (
+		<div>
+			<h1>Style</h1>
+			<div>{showSongsFilteredByStyle()}</div>
+		</div>
+	);
 }

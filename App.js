@@ -5,6 +5,8 @@ import PopularSongs from "./PopularSongs";
 import Styles from './Style';
 import AddSongs from './AddSongs';
 import Cart from "./Cart";
+import Lyrics from './Lyrics';
+import DisplayStyle from './DisplayStyle';
 
 function App() {
     const { songs } = useContext(Context);
@@ -30,7 +32,7 @@ function App() {
                             <PopularSongs key={song.id} song={song} />
                         ))}
                     </Route>
-                    <Route path="/style">
+                    <Route exact path="/style">
                         <Styles />
                     </Route>
                     <Route path="/add">
@@ -38,6 +40,12 @@ function App() {
                     </Route>
                     <Route path="/cart">
                         <Cart />
+                    </Route>
+                    <Route path="/style/:styleName">
+                        <DisplayStyle />       
+                    </Route>
+                    <Route path="/song/:songId">
+                        <Lyrics />
                     </Route>
                 </Switch>
             </div>

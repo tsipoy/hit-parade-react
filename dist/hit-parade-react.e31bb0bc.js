@@ -33888,7 +33888,27 @@ module.exports = [{
   "songTitle": "Let Her Go",
   "artistName": "Passenger",
   "id": 9058,
-  "lyrics": "gukey",
+  "lyrics": `
+            Well you only need the light when it's burning low
+            Only miss the sun when it starts to snow
+            Only know you love her when you let her go
+            Only know you've been high when you're feeling low
+            Only hate the road when you're missing home
+            Only know you love her when you let her go
+            And you let her go
+            Staring at the bottom of your glass
+            Hoping one day you'll make a dream last
+            But dreams come slow and they go so fast
+            You see her when you close your eyes
+            Maybe one day you'll understand why
+            Everything you touch surely dies
+            'Cause you only need the light when it's burning low
+            Only miss the sun when it starts to snow
+            Only know you love her when you let her go
+            Only know you've been high when you're feeling low
+            Only hate the road when you're missing home
+            Only know you love…
+        `,
   "style": "Folk",
   "isFavorited": false,
   "upvotes": 24,
@@ -33898,7 +33918,9 @@ module.exports = [{
   "songTitle": "400 volt",
   "artistName": "Wawa",
   "id": 1010,
-  "lyrics": "gukey",
+  "lyrics": `
+        Attention ça c’est salegy 400 Volt Instru Ça passé x 4 vibrer les hanches En bas, Ambanibany   Remonte un peu Vas y kawitry, un ptit peu, un ptit peu Encore monte un ptit peu Ay ay ay, chacun à son tour Mamie et papi son là, alefa Danse mamie, danse mamie, Tsy manaiky papi, avy papi Tsy manaiky resy papi, any nikatraoka, Alefa misaute sauté mzay jiaby Tourné la main comme ça x2 Tsika jaby mihetsika e!  x 4 Encore (Instru) Ça passe x 4 Ça va chauffer, zay valy e (Instru) Ça passe x 4 Alefa, tana io, tana io bouger vas y maman dance maman, dansé x4 stop dance papa, dansé x 4 stop danse petit, dansé x 4 Tsika jaby mihetsika e!  x 4 Attention 400volt, ça passe 2 x Izy koa fa latsaka ny ambiansy izay tsy mihetsika tsongoa Tsika jaby mihetsika e!  x 4 2 x Est-ce que les filles sexy sont là Danse somary mi sexy x4 Izy koa anao magnagno bagara e! dehors (Instru) Ça passe x 4   
+        `,
   "style": "Salegy",
   "isFavorited": false,
   "upvotes": 30,
@@ -34150,7 +34172,7 @@ function Styles() {
   function findStyle() {
     return styleLists.map(songStyles => /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
       key: songStyles,
-      to: "/style"
+      to: `/style/${songStyles}`
     }, /*#__PURE__*/_react.default.createElement("button", null, /*#__PURE__*/_react.default.createElement("i", {
       className: "ri-headphone-fill"
     }), songStyles)));
@@ -34297,7 +34319,82 @@ function Cart() {
 
 var _default = Cart;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./Context":"Context.js","./CartItems":"CartItems.js"}],"App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./Context":"Context.js","./CartItems":"CartItems.js"}],"Lyrics.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Lyrics;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactRouterDom = require("react-router-dom");
+
+var _Context = require("./Context");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function Lyrics() {
+  const {
+    songId
+  } = (0, _reactRouterDom.useParams)();
+  const {
+    songs
+  } = (0, _react.useContext)(_Context.Context);
+  console.log(songs);
+  const songLyrics = songs.find(song => song.id === Number(songId));
+  console.log(songLyrics?.songTitle);
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, songLyrics.artistName, ": ", songLyrics.songTitle), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, "Lyrics"), /*#__PURE__*/_react.default.createElement("pre", null, songLyrics.lyrics)));
+}
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./Context":"Context.js"}],"DisplayStyle.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = DisplayStyle;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactRouterDom = require("react-router-dom");
+
+var _Context = require("./Context");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function DisplayStyle() {
+  const {
+    styleName
+  } = (0, _reactRouterDom.useParams)();
+  const {
+    songs
+  } = (0, _react.useContext)(_Context.Context);
+
+  const songTemplate = song => {
+    return /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+      to: `/song/${song.id}`,
+      key: song.id
+    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, song.songTitle), /*#__PURE__*/_react.default.createElement("p", null, song.artistName)));
+  };
+
+  function showSongsFilteredByStyle() {
+    const filteredSongs = songs.filter(song => song.style === styleName).map(songTemplate);
+
+    if (filteredSongs.length === 0) {
+      return /*#__PURE__*/_react.default.createElement("p", null, "No results.");
+    }
+
+    return filteredSongs;
+  }
+
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Style"), /*#__PURE__*/_react.default.createElement("div", null, showSongsFilteredByStyle()));
+}
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./Context":"Context.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34318,6 +34415,10 @@ var _Style = _interopRequireDefault(require("./Style"));
 var _AddSongs = _interopRequireDefault(require("./AddSongs"));
 
 var _Cart = _interopRequireDefault(require("./Cart"));
+
+var _Lyrics = _interopRequireDefault(require("./Lyrics"));
+
+var _DisplayStyle = _interopRequireDefault(require("./DisplayStyle"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34352,17 +34453,22 @@ function App() {
     key: song.id,
     song: song
   }))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    exact: true,
     path: "/style"
   }, /*#__PURE__*/_react.default.createElement(_Style.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/add"
   }, /*#__PURE__*/_react.default.createElement(_AddSongs.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/cart"
-  }, /*#__PURE__*/_react.default.createElement(_Cart.default, null)))));
+  }, /*#__PURE__*/_react.default.createElement(_Cart.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    path: "/style/:styleName"
+  }, /*#__PURE__*/_react.default.createElement(_DisplayStyle.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    path: "/song/:songId"
+  }, /*#__PURE__*/_react.default.createElement(_Lyrics.default, null)))));
 }
 
 var _default = App;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./Context":"Context.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./PopularSongs":"PopularSongs.js","./Style":"Style.js","./AddSongs":"AddSongs.js","./Cart":"Cart.js"}],"index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./Context":"Context.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./PopularSongs":"PopularSongs.js","./Style":"Style.js","./AddSongs":"AddSongs.js","./Cart":"Cart.js","./Lyrics":"Lyrics.js","./DisplayStyle":"DisplayStyle.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -34406,7 +34512,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60382" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57846" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
