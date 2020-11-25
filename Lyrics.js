@@ -10,10 +10,9 @@ export default function Lyrics() {
     const songLyrics = songs.find(song => song.id === Number(songId));
     console.log(songLyrics?.songTitle)
     return (
-        <div>
+        <div className="lyricsWrapper">
             <h2>{songLyrics.artistName}: {songLyrics.songTitle}</h2>
-
-            <div>
+            <div className="lyrics">
                 <h3>Lyrics</h3>
                 <pre>{songLyrics.lyrics}</pre>
             </div>

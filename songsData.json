@@ -1,9 +1,39 @@
 [
     {
-        "songTitle": "Tompo tsy foiko",
-        "artistName": "Ny Ainga",
+        "songTitle": "It's the climb",
+        "artistName": "Miley Cyrus",
         "id": 5077,
-        "lyrics": "gukey",
+        "lyrics": `
+            I can almost see it
+            That dream I'm dreaming but
+            There's a voice inside my head saying
+            You'll never reach it,
+            Every step I'm taking,
+            Every move I make feels
+            Lost with no direction
+            My faith is shaking but I
+            Gotta keep trying
+            Gotta keep my head held high
+            There's always gonna be another mountain
+            I'm always gonna wanna make it move
+            Always gonna be an uphill battle
+            Sometimes I'm gonna have to lose
+            Ain't about how fast I get there
+            Ain't about what's waiting on the other side
+            It's the climb
+            The struggles I'm facing
+            The chances I'm taking
+            Sometimes might knock me down but
+            No I'm not breaking
+            I may not know it
+            But these are the moments that
+            I'm going to remember most yeah
+            Just got to keep going
+            And I
+            I gotta be strong
+            Just keep pushing on, 'cause
+            There's always gonna be another…
+        `,
         "style": "Country",
         "isFavorited": false,
         "upvotes": 10,
@@ -14,7 +44,26 @@
         "songTitle": "Trust And Obey",
         "artistName": "Don Moen",
         "id": 1659,
-        "lyrics": "gukey",
+        "lyrics": `
+            When we walk with the Lord in the light of His Word,
+            What a glory He sheds on our way!
+            While we do His good will, He abides with us still,
+            And with all who will trust and obey.
+            Trust and obey, for there's no other way
+            To be happy in Jesus, but to trust and obey.
+            Not a shadow can rise, not a cloud in the skies,
+            But His smile quickly drives it away;
+            Not a doubt or a fear, not a sigh or a tear,
+            Can abide while we trust and obey.
+            Trust and obey, for there's no other way
+            To be happy in Jesus, but to trust and obey.
+            Then in fellowship sweet we will sit at His feet.
+            Or we'll walk by His side in the way.
+            What He says we will do, where He sends we will go;
+            Never fear, only trust and obey.
+            Trust and obey, for there's no other way
+            To be happy in Jesus, but to trust…
+        `,
         "style": "Slow",
         "isFavorited": false,
         "upvotes": 5,
@@ -25,8 +74,37 @@
         "songTitle": "Westlife",
         "artistName": "Fool Again",
         "id": 7368,
-        "lyrics": "gukey",
-        "style": "Rock",
+        "lyrics": `
+            Baby, I know the story
+            I've seen the picture
+            It's written all over your face
+            Tell me, what's the secret that you've been hiding?
+            And who's gonna take my place?
+            I should have seen it coming
+            I should have read the signs
+            Anyway, I guess it's over
+            Can't believe that I'm a fool again
+            I thought this love would never end
+            How was I to know?
+            You never told me
+            Can't believe that I'm a fool again
+            And I who thought you were my friend
+            How was I to know?
+            You never told me
+            Baby, you should've called me
+            When you were lonely
+            When you needed me to be there
+            Sadly, you never gave me
+            Too many chances to show you
+            How much I care
+            Ooh, should have seen it coming
+            I should have read the signs
+            Anyway, I guess it's over
+            Can't believe that I'm a fool again
+            I thought this love would never end
+            How…
+        `,
+        "style": "Pop",
         "isFavorited": false,
         "upvotes": 22,
         "downvotes": 1,
@@ -64,13 +142,46 @@
         "price": 100
     },
     {
-        "songTitle": "400 volt",
-        "artistName": "Wawa",
+        "songTitle": "I am alive",
+        "artistName": "Celine Dion",
         "id": 1010,
         "lyrics": `
-        Attention ça c’est salegy 400 Volt Instru Ça passé x 4 vibrer les hanches En bas, Ambanibany   Remonte un peu Vas y kawitry, un ptit peu, un ptit peu Encore monte un ptit peu Ay ay ay, chacun à son tour Mamie et papi son là, alefa Danse mamie, danse mamie, Tsy manaiky papi, avy papi Tsy manaiky resy papi, any nikatraoka, Alefa misaute sauté mzay jiaby Tourné la main comme ça x2 Tsika jaby mihetsika e!  x 4 Encore (Instru) Ça passe x 4 Ça va chauffer, zay valy e (Instru) Ça passe x 4 Alefa, tana io, tana io bouger vas y maman dance maman, dansé x4 stop dance papa, dansé x 4 stop danse petit, dansé x 4 Tsika jaby mihetsika e!  x 4 Attention 400volt, ça passe 2 x Izy koa fa latsaka ny ambiansy izay tsy mihetsika tsongoa Tsika jaby mihetsika e!  x 4 2 x Est-ce que les filles sexy sont là Danse somary mi sexy x4 Izy koa anao magnagno bagara e! dehors (Instru) Ça passe x 4   
+            Mmmm
+            I get wings to fly
+            Oh, I'm alive
+            When you call on me
+            When I hear you breath
+            I get wings to fly
+            I feel that I'm alive
+            When you look at me
+            I can touch the sky
+            I know that I'm alive
+            When you bless the day
+            I just drift away
+            All my worries die
+            I'm glad that I'm alive
+            You've set my heart on fire
+            Filled me with love
+            Made me a woman on clouds above
+            I couldn't get much higher
+            My spirit takes flight
+            Cause I'm alive
+            When you call on me
+            (When I hear you breath)
+            When I hear you breath
+            I get wings to fly
+            I feel that I'm alive
+            I am alive
+            When you reach for me
+            Raising spirits high
+            God knows that
+            That I'll be the one
+            Standing by
+            Through good and through trying times
+            And it's only begun
+            I can't…          
         `,
-        "style": "Salegy",
+        "style": "Slow",
         "isFavorited": false,
         "upvotes": 30,
         "downvotes": 6,
